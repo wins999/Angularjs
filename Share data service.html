@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+
+<body ng-app="myApp">
+
+  <div ng-controller="FirstCtrl">
+    <input type="text" ng-model="Person.name">
+    <br>Input is : <strong>{{Person.name}}</strong>
+   </div>
+
+<hr>
+
+  <div ng-controller="SecondCtrl">
+    Input should also be here: {{Person.name}}
+  </div>
+
+<script>
+
+var myApp = angular.module("myApp",[]);
+//create SharedDataService
+myApp.service('SharedDataService', function () {
+     var Person = {
+        name: ''
+
+    };
+    return Person;
+});
+
+//First Controller
+myApp.controller("FirstCtrl", ['$scope', 'SharedDataService',
+    function ($scope, SharedDataService) {
+    $scope.Person = SharedDataService;
+    }]);
+
+//Second Controller
+myApp.controller("SecondCtrl", ['$scope', 'SharedDataService',
+    function ($scope, SharedDataService) {
+    $scope.Person = SharedDataService;
+}]);
+
+</script>
+
+
+</body>
+</html>

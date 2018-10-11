@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body ng-app="myApp">
+
+  <div ng-controller="FirstCtrl">
+    <input type="text" ng-model="FirstName"><!-- Input entered here -->
+    <br>Input is : <strong>{{FirstName}}</strong><!-- Successfully updates here -->
+</div>
+
+<hr>
+
+<div ng-controller="SecondCtrl">
+    Input should also be here: {{FirstName}}<!-- How do I automatically updated it here? -->
+</div>
+
+<script>
+// declare the app with no dependencies
+var myApp = angular.module('myApp', []);
+
+// make a factory to share data between controllers
+myApp.factory('Data', function(){
+    // I know this doesn't work, but what will?
+    var FirstName = '';
+    return FirstName;
+});
+
+// Step 1 Controller
+myApp.controller('FirstCtrl', function( $scope, Data ){
+
+});
+
+// Step 2 Controller
+myApp.controller('SecondCtrl', function( $scope, Data ){
+    $scope.FirstName = Data.FirstName;
+});
+
+</script>
+
+
+</body>
